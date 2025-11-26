@@ -1,168 +1,184 @@
-# 📅 Agenda Pessoal - Full Stack
+# 📅 Minha Agenda — Full Stack Productivity App
 
-Uma aplicação completa de agenda pessoal com lista de tarefas e controle financeiro, desenvolvida com TypeScript, Express.js, Prisma ORM e React.
+Uma aplicação completa de **agenda pessoal**, com:
+
+- ✔️ Visão diária (metas, tarefas, cronograma horário)  
+- ✔️ Visão mensal (FullCalendar com eventos e compromissos)  
+- ✔️ Controle financeiro mensal  
+- ✔️ Autenticação com JWT  
+- ✔️ Backend robusto com Prisma + PostgreSQL  
+
+Tudo desenvolvido com **TypeScript**, **Express.js**, **Prisma** e **React**.
 
 ## 🚀 Funcionalidades
 
-### ✅ Lista de Tarefas
-- Criar novas tarefas
-- Marcar tarefas como completas
-- Visualizar tarefas por data
-- Excluir tarefas
+### 📝 Visão Diária
+- 3 listas de tarefas com *drag & drop*:
+  - 🌟 Metas do dia  
+  - 🔥 Tarefas Importantes  
+  - 🕒 Para Amanhã  
+- Inputs rápidos que sempre completam 5 linhas
+- Completar, mover ou deletar tarefa
+- Cronograma completo (05:00 → 23:30)
+- Criar compromissos com modal
+- Exibir eventos all-day do dia selecionado
+
+### 📆 Calendário Mensal
+- Visualização FullCalendar
+- Mostra eventos all-day
+- Criar:
+  - Evento (dia inteiro)
+  - Compromisso com horário
+- Ir direto para a visão diária de um dia
 
 ### 💰 Controle Financeiro
-- Registrar receitas e despesas
-- Visualizar extrato mensal
-- Ver saldo e totais
-- Categorizar transações
+- Registrar receitas/despesas
+- Resumo mensal automático:
+  - total de receitas
+  - total de despesas
+  - saldo
+- Listar últimas transações
+- Deletar transações
 
-## 🛠️ Tecnologias
+### 🔐 Autenticação
+- Registro e login com JWT
+- Token salvo no localStorage
+- Interceptor Axios adiciona automaticamente o token
+- API inteira autenticada (exceto /auth)
+
+## 🛠 Tecnologias
 
 ### Backend
-- **Node.js** + **TypeScript**
-- **Express.js** - Framework web
-- **Prisma ORM** - Banco de dados
-- **PostgreSQL** - Banco de dados principal
-- **SQLite** - Opção para desenvolvimento
+- Node.js + TypeScript  
+- Express.js  
+- Prisma ORM  
+- PostgreSQL (Docker)  
+- JWT Auth  
 
 ### Frontend
-- **React** + **TypeScript**
-- **Axios** - Cliente HTTP
-- **CSS** - Estilização
-
-## 📋 Pré-requisitos
-
-- Node.js 18+
-- npm ou yarn
-- PostgreSQL (opcional - SQLite incluso)
-
-## 🚀 Como Executar
-
-### 1. Clone o repositório
-```bash
-git clone https://github.com/LKSFDS/agenda-app.git
-cd agenda-app
-```
-
-### 2. Configure o Backend
-```bash
-cd backend
-
-# Instale as dependências
-npm install
-
-# Configure as variáveis de ambiente
-cp ../.env.example prisma/.env
-# Edite o arquivo prisma/.env com suas configurações
-
-# Configure o banco de dados
-npx prisma generate
-npx prisma migrate dev --name init
-
-# Execute o servidor
-npm run dev
-```
-
-### 3. Configure o Frontend
-```bash
-cd ../frontend
-
-# Instale as dependências
-npm install
-
-# Execute o frontend
-npm start
-```
-
-### 4. Acesse a aplicação
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:3001
-- **Prisma Studio**: http://localhost:5555 (execute `npx prisma studio` no backend)
-
-## 🐘 Configuração do Banco de Dados
-
-### Opção 1: PostgreSQL (Recomendado)
-```bash
-# Com Docker
-docker run --name postgres-agenda \
-  -e POSTGRES_USER=agenda_user \
-  -e POSTGRES_PASSWORD=senha123 \
-  -e POSTGRES_DB=agenda_db \
-  -p 5432:5432 \
-  -d postgres:15
-```
-
-### Opção 2: SQLite (Desenvolvimento)
-Altere o `prisma/schema.prisma` para:
-```prisma
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-```
+- React + TypeScript  
+- Axios  
+- FullCalendar  
+- @hello-pangea-dnd  
 
 ## 📁 Estrutura do Projeto
 
-```
+```plaintext
 agenda-app/
-├── backend/                 # API Backend
-│   ├── src/
-│   │   ├── controllers/     # Lógica das rotas
-│   │   ├── routes/          # Definição de rotas
-│   │   └── app.ts          # Configuração do Express
+├── backend/
 │   ├── prisma/
-│   │   └── schema.prisma   # Schema do banco
-│   └── package.json
-├── frontend/               # Aplicação React
+│   │   └── schema.prisma
 │   ├── src/
-│   │   ├── components/     # Componentes React
-│   │   ├── services/       # API services
-│   │   └── types/          # Tipos TypeScript
-│   └── package.json
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── app.ts
+│   │   └── server.ts
+│   ├── docker-compose.yml
+│   └── .env
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── services/
+│   │   └── types/
+│   └── public/
+│
 ├── .gitignore
-├── .env.example
 └── README.md
 ```
 
-## 🛠️ Comandos Úteis
+## 📌 Importante sobre o Banco de Dados
 
-### Backend
-```bash
-npm run dev          # Desenvolvimento
-npm run build        # Build para produção
-npm start           # Produção
-npx prisma studio   # Interface do banco
+A pasta:
+
+```
+backend/postgres-data/
 ```
 
-### Frontend
+é o volume do Docker.  
+❗ **Não deve ir para o Git.**
+
+## 🚀 Como Rodar o Projeto
+
+### 1. Pré-requisitos
+- Node 18+
+- Docker + Docker Compose
+- npm ou yarn
+- Porta 5432 livre
+
+---
+
+# ▶️ 2. Backend
+
+### 2.1 Entrar na pasta
 ```bash
-npm start           # Desenvolvimento
-npm run build       # Build para produção
+cd backend
 ```
 
-## 🔧 Variáveis de Ambiente
+### 2.2 Subir PostgreSQL
+```bash
+docker compose up -d
+```
 
-Crie um arquivo `prisma/.env` no backend com:
-
+### 2.3 Criar `.env`
 ```env
-DATABASE_URL="sua_string_de_conexao"
+DATABASE_URL="postgresql://agenda_user:senha123@localhost:5432/agenda_db?schema=public"
+JWT_SECRET="uma_chave_secreta_muito_segura"
 PORT=3001
 ```
 
-## 🤝 Contribuindo
+### 2.4 Instalar dependências
+```bash
+npm install
+```
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+### 2.5 Gerar Prisma Client
+```bash
+npx prisma generate
+```
 
-## 📝 Licença
+### 2.6 Aplicar migrações
+```bash
+npx prisma migrate dev
+```
 
-Este projeto está sob a licença MIT.
+### 2.7 Rodar backend
+```bash
+npm run dev
+```
 
-## 👨‍💻 Autores
+---
 
-Lucas Freire de Siqueira - [link github](https://github.com/LKSFDS)
+# 💻 3. Frontend
 
-Mateus Rodrigues Lopes - [link github](https://github.com/mtslopes13)
+### Instalar dependências
+```bash
+cd ../frontend
+npm install
+```
+
+### Rodar
+```bash
+npm start
+```
+
+---
+
+# 🔧 Comandos Úteis
+
+```bash
+npm run dev
+docker compose up -d
+docker compose down
+npx prisma migrate dev
+npx prisma studio
+npm start
+npm run build
+```
+
+---
+
+# 👨‍💻 Autores
+- Lucas — https://github.com/LKSFDS  
+- Mateus — https://github.com/mtslopes13  

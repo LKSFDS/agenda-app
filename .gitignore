@@ -30,6 +30,7 @@ build/
 *.sqlite
 *.sqlite3
 /prisma/migrations/
+postgres-data/
 !prisma/schema.prisma
 
 # =============================================
