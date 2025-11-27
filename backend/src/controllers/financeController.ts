@@ -7,7 +7,8 @@ export const financeController = {
   async addTransaction(req: Request, res: Response) {
     try {
       const { type, amount, description, category, date } = req.body;
-      const userId = "user-temp-123";
+      // @ts-ignore
+      const userId = req.userId as string;
 
       const transaction = await prisma.finance.create({
         data: {
@@ -28,7 +29,8 @@ export const financeController = {
 
   async getMonthlyStatement(req: Request, res: Response) {
     try {
-      const userId = "user-temp-123";
+      // @ts-ignore
+      const userId = req.userId as string;
       const { year, month } = req.query;
 
       const currentYear = parseInt(year as string) || new Date().getFullYear();
@@ -69,7 +71,8 @@ export const financeController = {
 
   async getUserFinances(req: Request, res: Response) {
     try {
-      const userId = "user-temp-123";
+      // @ts-ignore
+      const userId = req.userId as string;
       const finances = await prisma.finance.findMany({
         where: { userId },
         orderBy: { date: 'desc' },

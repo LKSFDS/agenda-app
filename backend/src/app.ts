@@ -1,7 +1,11 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
+import authRoutes from './routes/auth';
 import taskRoutes from './routes/tasks';
+import dailyRoutes from './routes/daily';
 import financeRoutes from './routes/finances';
+import calendarRoutes from './routes/calendar';
+
 
 const app = express();
 
@@ -10,8 +14,11 @@ app.use(cors());
 app.use(express.json());
 
 // Rotas
+app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/daily', dailyRoutes);
 app.use('/api/finances', financeRoutes);
+app.use('/api/calendar', calendarRoutes);
 
 // Health Check
 app.get('/health', (req, res) => {
