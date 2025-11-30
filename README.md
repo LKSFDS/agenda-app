@@ -121,7 +121,7 @@ cd backend
 docker compose up -d
 ```
 
-### 2.3 Criar `.env`
+### 2.3 Criar `.env` em backend/prisma
 ```env
 DATABASE_URL="postgresql://agenda_user:senha123@localhost:5432/agenda_db?schema=public"
 JWT_SECRET="uma_chave_secreta_muito_segura"
