@@ -34,8 +34,6 @@ export interface MonthlySummary {
   balance: number;
 }
 
-// USUÁRIO E AUTENTICAÇÃO (ADICIONADO)
-
 export interface User {
   id: string;
   name: string;
@@ -46,8 +44,6 @@ export interface AuthResponse {
   user: User;
   token: string;
 }
-
-// TIPO GENÉRICO DE API (se ainda for usar)
 
 export interface ApiResponse<T> {
   data: T;
@@ -75,7 +71,7 @@ export interface CalendarEvent {
   allDay: boolean;
   type: string;
   userId?: string;
-  color?: string; // 👈 NOVO
+  color?: string;
 }
 
 export interface DailyData {
